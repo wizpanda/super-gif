@@ -1,0 +1,28 @@
+{
+    "name": "super-gif",
+    "version": "1.0.0",
+    "description": "GIF parser & player in Typescript to work with node_modules (converted from https://github.com/buzzfeed/libgif-js)",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/wizpanda/super-gif.git"
+    },
+    "keywords": [
+        "gif",
+        "typescript",
+        "javascript",
+        "angular"
+    ],
+    "author": "Shashank Agrawal",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/wizpanda/super-gif/issues"
+    },
+    "homepage": "https://github.com/wizpanda/super-gif#readme",
+    "devDependencies": {
+        "typescript": "^3.0.1"
+    }
+}

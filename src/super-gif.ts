@@ -69,13 +69,8 @@ export class SuperGif {
     };
 
     constructor(private gifImgElement: HTMLImageElement, opts: any) {
-
         for (let i in opts) {
             this.options[i] = opts[i];
-        }
-
-        if (this.options.viewPortWidth && this.options.viewPortHeight) {
-            this.options.is_vp = true;
         }
 
         this.onEndListener = opts.onEnd;
@@ -101,7 +96,7 @@ export class SuperGif {
         }
 
         this.initialized = true;
-    };
+    }
 
     private loadSetup(callback) {
         if (this.loading) {
@@ -121,7 +116,7 @@ export class SuperGif {
         this.lastImg = null;
 
         return true;
-    };
+    }
 
     private completeLoop() {
         if (this.onEndListener) {
@@ -136,7 +131,7 @@ export class SuperGif {
             this.stepping = false;
             this.playing = false;
         }
-    };
+    }
 
     private doStep() {
         this.stepping = this.playing;
@@ -159,7 +154,7 @@ export class SuperGif {
         } else {
             setTimeout(this.doStep.bind(this), delay);
         }
-    };
+    }
 
     private step() {
         if (!this.stepping) {
@@ -184,7 +179,7 @@ export class SuperGif {
         this.tmpCanvas.getContext('2d').putImageData(this.frames[this.currentFrameIndex].data, offset.x, offset.y);
         this.canvasContext.globalCompositeOperation = 'copy';
         this.canvasContext.drawImage(this.tmpCanvas, 0, 0);
-    };
+    }
 
     private playerInit() {
         if (this.loadErrorCause) return;
@@ -197,7 +192,7 @@ export class SuperGif {
             this.currentFrameIndex = 0;
             this.putFrame();
         }
-    };
+    }
 
     private clear() {
         this.transparency = null;
@@ -205,7 +200,7 @@ export class SuperGif {
         this.lastDisposalMethod = this.disposalMethod;
         this.disposalMethod = null;
         this.frame = null;
-    };
+    }
 
     // XXX: There's probably a better way to handle catching exceptions when
     // callbacks are involved.
@@ -216,7 +211,7 @@ export class SuperGif {
         } catch (err) {
             this.doLoadError('parse');
         }
-    };
+    }
 
     private setSizes(width, height) {
         this.canvas.width = width * this.getCanvasScale();
@@ -227,7 +222,7 @@ export class SuperGif {
         this.tmpCanvas.style.width = width + 'px';
         this.tmpCanvas.style.height = height + 'px';
         this.tmpCanvas.getContext('2d').setTransform(1, 0, 0, 1, 0, 0);
-    };
+}
 
     private drawError() {
         this.canvasContext.fillStyle = 'black';
@@ -239,7 +234,7 @@ export class SuperGif {
         this.canvasContext.moveTo(0, this.hdr.height);
         this.canvasContext.lineTo(this.hdr.width, 0);
         this.canvasContext.stroke();
-    };
+}
 
     private doLoadError(originOfError: string) {
         this.loadErrorCause = originOfError;
@@ -250,12 +245,12 @@ export class SuperGif {
 
         this.frames = [];
         this.drawError();
-    };
+    }
 
     private doHdr(_hdr) {
         this.hdr = _hdr;
         this.setSizes(this.hdr.width, this.hdr.height);
-    };
+    }
 
     private doGCE(gce) {
         this.pushFrame();
@@ -264,7 +259,7 @@ export class SuperGif {
         this.delay = gce.delayTime;
         this.disposalMethod = gce.disposalMethod;
         // We don't have much to do with the rest of GCE.
-    };
+    }
 
     private pushFrame() {
         if (!this.frame) {
@@ -277,7 +272,7 @@ export class SuperGif {
         });
 
         this.frameOffsets.push({x: 0, y: 0});
-    };
+    }
 
     private doImg(img) {
         if (!this.frame) {
@@ -342,10 +337,10 @@ export class SuperGif {
         }
 
         this.lastImg = img;
-    };
+    }
 
     private doNothing() {
-    };
+    }
 
     private withProgress(fn) {
         return function (block) {
@@ -417,7 +412,7 @@ export class SuperGif {
         this.putFrame();
     }
 
-    private loadURL(src: string, callback) {
+    loadURL(src: string, callback) {
         if (!this.loadSetup(callback)) {
             return;
         }
@@ -466,7 +461,7 @@ export class SuperGif {
         request.send();
     }
 
-    load(callback) {
+    load(callback): void {
         this.loadURL(this.gifImgElement.src, callback);
     }
 }

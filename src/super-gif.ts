@@ -397,6 +397,10 @@ export class SuperGif {
         return this.loading;
     }
 
+    isReady() {
+        return this.ready;
+    }
+
     isAutoPlay() {
         return this.options.autoPlay;
     }

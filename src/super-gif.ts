@@ -11,6 +11,7 @@ export class SuperGif {
 
     private loadErrorCause: string;
     private loading = false;
+    private ready = false;
 
     private transparency = null;
     private delay = null;
@@ -61,6 +62,8 @@ export class SuperGif {
 
             this.playerInit();
             this.loading = false;
+            this.ready = true;
+
             if (this.loadCallback) {
                 this.loadCallback(this.gifImgElement);
             }

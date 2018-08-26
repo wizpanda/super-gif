@@ -7,7 +7,6 @@ export class SuperGif {
         autoPlay: true
     };
 
-    private stream: SuperGifStream;
     private hdr;
 
     private loadErrorCause: string;
@@ -204,9 +203,9 @@ export class SuperGif {
 
     // XXX: There's probably a better way to handle catching exceptions when
     // callbacks are involved.
-    private doParse() {
+    private parseStream(stream: SuperGifStream) {
         try {
-            let parser = new SuperGifParser(this.stream, this.handler);
+            let parser = new SuperGifParser(stream, this.handler);
             parser.parse();
         } catch (err) {
             this.doLoadError('parse');
@@ -450,8 +449,10 @@ export class SuperGif {
                 data = new Uint8Array(data);
             }
 
-            this.stream = new SuperGifStream(data);
-            setTimeout(this.doParse.bind(this), 0);
+            const stream = new SuperGifStream(data);
+            setTimeout(() => {
+                this.parseStream(stream);
+            }, 0);
         };
 
         request.onerror = () => {

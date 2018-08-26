@@ -1,6 +1,6 @@
 {
     "name": "@wizpanda/super-gif",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "GIF parser & player in Typescript to work with node_modules (converted from https://github.com/buzzfeed/libgif-js)",
     "main": "dist/super-gif.js",
     "type": "dist/super-gif.d.ts",

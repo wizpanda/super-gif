@@ -208,7 +208,7 @@ export class SuperGif {
             let parser = new SuperGifParser(stream, this.handler);
             parser.parse();
         } catch (err) {
-            this.doLoadError('parse');
+            this.handleError('parse');
         }
     }
 
@@ -221,7 +221,7 @@ export class SuperGif {
         this.tmpCanvas.style.width = width + 'px';
         this.tmpCanvas.style.height = height + 'px';
         this.tmpCanvas.getContext('2d').setTransform(1, 0, 0, 1, 0, 0);
-}
+    }
 
     private drawError() {
         this.canvasContext.fillStyle = 'black';
@@ -233,9 +233,9 @@ export class SuperGif {
         this.canvasContext.moveTo(0, this.hdr.height);
         this.canvasContext.lineTo(this.hdr.width, 0);
         this.canvasContext.stroke();
-}
+    }
 
-    private doLoadError(originOfError: string) {
+    private handleError(originOfError: string) {
         this.loadErrorCause = originOfError;
         this.hdr = {
             width: this.gifImgElement.width,
@@ -441,7 +441,8 @@ export class SuperGif {
 
         request.onload = () => {
             if (request.status !== 200) {
-                this.doLoadError('xhr - response');
+                this.handleError('xhr - response');
+                return;
             }
 
             let data = request.response;
@@ -456,7 +457,7 @@ export class SuperGif {
         };
 
         request.onerror = () => {
-            this.doLoadError('xhr');
+            this.handleError('xhr');
         };
 
         request.send();

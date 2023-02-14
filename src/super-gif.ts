@@ -77,8 +77,8 @@ export class SuperGif {
 
         this.onEndListener = opts.onEnd;
         this.loopDelay = opts.loopDelay || 0;
-        this.overrideLoopMode = opts.loopMode || 'auto';
-        this.drawWhileLoading = opts.drawWhileLoading || true;
+        this.overrideLoopMode = opts.loopMode ?? 'auto';
+        this.drawWhileLoading = opts.drawWhileLoading ?? true;
     }
 
     private init() {
